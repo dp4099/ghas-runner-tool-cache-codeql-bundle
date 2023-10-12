@@ -1,0 +1,24 @@
+name: codeql artifact
+on:
+  workflow_dispatch:
+jobs:
+  upload_tool_cache:
+    runs-on: ubuntu-20.04
+    continue-on-error: true
+    steps:
+      - name: Clear any existing tool cache
+        run: |
+          mv "${{ runner.tool_cache }}" "${{ runner.tool_cache }}.old"
+          mkdir -p "${{ runner.tool_cache }}"
+      - name: initialize codeql
+        uses: github/codeql-action/init@v2
+      - name: Archive tool cache
+        if: always()
+        run: |
+          cd "${{ runner.tool_cache }}"
+          tar -czf tool_cache_codeql_bundle.tar.gz *
+      - name: Upload tool cache artifact
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          path: ${{runner.tool_cache}}/tool_cache_codeql_bundle.tar.gz
