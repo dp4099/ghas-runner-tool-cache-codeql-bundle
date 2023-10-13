@@ -12,7 +12,7 @@ jobs:
           mkdir -p "${{ runner.tool_cache }}"
     
       - name: initialize codeql
-        uses: codeql-action/init@v2
+        uses: github/codeql-action/init@v2
       - name: Archive tool cache
         if: always()
         run: |
