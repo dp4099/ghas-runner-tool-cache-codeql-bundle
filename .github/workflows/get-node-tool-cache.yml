@@ -14,10 +14,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14.x
+
       - name: Setup Node 16
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+
+      - name: Setup Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+
       - name: Archive tool cache
         run: |
           cd "${{ runner.tool_cache }}"
